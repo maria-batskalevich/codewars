@@ -58,11 +58,16 @@ let names = ['Alex', 'Jacob', 'Mark', 'Max']
 const likes = (names) => {
     names = names || []
     switch (names.length) {
-        case 0: return `no one likes this`
-        case 1: return `${names[0]} likes this`
-        case 2: return `${names[0]} and ${names[1]} like this`
-        case 3: return `${names[0]}, ${names[1]} and ${names[2]} like this`
-        default: return `${names[0]}, ${names[1]} and ${names.length-2} others like this`
+        case 0:
+            return `no one likes this`
+        case 1:
+            return `${names[0]} likes this`
+        case 2:
+            return `${names[0]} and ${names[1]} like this`
+        case 3:
+            return `${names[0]}, ${names[1]} and ${names[2]} like this`
+        default:
+            return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
     }
 }
 // console.log(likes(names))
@@ -91,7 +96,134 @@ const findAnagrams = (anagram, arrayOfAnagrams) => {
 // squareDigits(9119) --> 811181
 
 const squareDigits = (n) => {
-    return +n.toString().split('').map(el => el*el).join('')
+    return +n.toString().split('').map(el => el * el).join('')
 }
 
 // console.log(squareDigits(9119))  // answer: 811181
+
+//6. Imagine a bus picking up and dropping off people at every stop.
+// Given an array of arrays, the first element of which is equal to the number of passengers,
+// who entered the bus at the stop, and the second - the number of passengers,
+// got off at the stop.
+//
+// Your task is to write a function that returns the number of people
+// remaining on the bus after the last stop (array).
+// Even though this is the last stop
+// there are still people on the bus (they must have fallen asleep :D ).
+//
+// Remember that the number of people left on the bus is always >= 0
+// The value of the second number of the first array element = 0,
+// because the bus is empty at the first stop.
+//
+// For example:
+// busStops([[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]) --> 17
+
+const busStopsPassArr = [[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]
+const busStops = (busStopsPassArr) => {
+    let result = [].concat(...busStopsPassArr) //[3, 0, 9, 1, 4, 10, 12, 2, 6, 1, 7, 10]
+    let res = 0;
+    debugger
+    for (let i = 0; i < result.length; i = i + 2) {
+        debugger
+        res += result[i] - result[i + 1]
+    }
+    return res
+}
+
+// console.log(busStops(busStopsPassArr))
+
+//7. In order to ensure data security when paying online,
+// we need to mask all the digits of the bank account except the last four.
+//
+// Your task is to write a function that takes as
+// parameter string consisting of numbers, replaces all elements with '#',
+// except for the last four and returns it.
+//
+// For example:
+// maskify("4556364607935616") --> "############5616"
+
+const cardNumber = "4556364607935616"
+const maskify = (str) => {
+    const rest12Symbols = str.split('').slice(0, 12)
+    const last4Symbols = str.substr(12, 4).split('').map(el => el.replace(el, '#'))
+    return rest12Symbols.concat(last4Symbols).join('')
+}
+// console.log(maskify(cardNumber))
+
+//8. Given two strings that contain only letters from a - z.
+// Your task is to write a function that returns
+// a new sorted (in order) string,
+// which contains the letters of two strings repeated only once.
+//
+// For example:
+// longest("xyaabbbccccdefww", "xxxxyyyyabklmopq") --> "abcdefklmopqxy"
+
+const str1 = "xyaabbbccccdefww"
+const str2 = "xxxxyyyyabklmopq"
+const longest = (str1, str2) => {
+    let arrayNotUnique = [...new Set(str1), ...new Set(str2)]
+    return [...new Set(arrayNotUnique)].sort().join('')
+}
+console.log(longest(str1, str2))
+
+
+//9. Given an array of words, you need to determine
+// whether all words are made up of the same characters.
+//
+// For example:
+// ["cat", "current", "who"] --> true
+// ["cat", "tk", "who"] --> false
+
+const cats = ["cat", "tac", "act"];
+const cats2 = ["cat", "tk", "who"]
+const isTheSame = (arr) => {
+    let res = arr.map(el => el.split('').sort().join(''))
+    return res.every(el => el === res[0])
+}
+
+console.log(isTheSame(cats))
+
+
+//10.Write a function that finds the most used element in an array.
+//
+// For example:
+// const array=[7, 'z', 'z', 'z', 3, 7, 'z', 7, 'z', 3, 5, 7]; --> "z"
+
+
+//10.xx Collect all the values in a separate array
+const tree = {
+    value: 1,
+    children: [
+        {
+            value: 2,
+            children: [
+                {
+                    value: 3,
+                }
+            ]
+        },
+        {
+            value: 4,
+            children: [
+                {value: 5},
+                {value: 6},
+            ]
+        },
+    ]
+}
+
+const gerTreeValues = (tree) => {
+    const stack = [tree];
+    const result = []
+    while (stack.length > 0) {
+        let node = stack.pop()
+        if (node.value !== undefined) {
+            result.push(node.value)
+        }
+        if (node.children?.length) {
+            stack.push(...node.children)
+        }
+    }
+    return result
+}
+// console.log(gerTreeValues(tree))
