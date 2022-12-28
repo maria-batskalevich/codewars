@@ -27,12 +27,12 @@
 // Returns a list of integers from start to stop, incremented by step, exclusive.
 //
 // Note that ranges that stop before they start are considered to be zero-length instead of negative.
-function range (start, stop, step){
+function range(start, stop, step) {
     let result = [],
         a = arguments.length === 1 ? 0 : start,
         b = arguments.length === 1 ? start : stop,
-        c = step !== void(0) ? step : 1;
-    if( b < a ) return result;
+        c = step !== void (0) ? step : 1;
+    if (b < a) return result;
 
     for (let i = a; (step === 0 ? result.length + a : i) < b; i = i + c) {
         result.push(i);
@@ -60,14 +60,15 @@ const spinWords = (string) => {
 // The returned format must be correct in order to complete this challenge.
 //
 // Don't forget the space after the closing parentheses!
-function createPhoneNumber(numbers) {
-    let left = numbers.splice(0, 0, '(')
-    let right = numbers.splice(4, 0, ')')
-    let def = numbers.splice(8, 0, '-')
-    let space = numbers.splice(5, 0, ' ')
-    return numbers.join('')
+function createPhoneNumber(numbers){
+    let format = "(xxx) xxx-xxxx";
+    for(let i = 0; i < numbers.length; i++) {
+        format = format.replace('x', numbers[i]);
+    }
+    return format;
 }
 
+console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
 //Sum of Digits / Digital Root
 //Digital root is the recursive sum of all the digits in a number.
 //
@@ -82,7 +83,7 @@ function digitalRoot(n) {
     let sum = n.toString().split('').map(m => parseInt(m)).reduce((acc, num) => acc + num)
     if (sum > 9) {
         sum = sum.toString().split('').map(m => parseInt(m)).reduce((acc, num) => acc + num)
-        if(sum > 9) {
+        if (sum > 9) {
             sum = sum.toString().split('').map(m => parseInt(m)).reduce((acc, num) => acc + num)
         }
     }
@@ -206,7 +207,7 @@ function towerBuilder(nFloors) {
     for (let i = 0; i < nFloors; i++) {
         let space = nFloors - i - 1;
         let spaceFloor = ' '.repeat(space)
-        let symbol = 2*i + 1;
+        let symbol = 2 * i + 1;
         let symbolFloor = '*'.repeat(symbol)
         towel[i] = spaceFloor + symbolFloor + spaceFloor
     }
@@ -284,8 +285,9 @@ function findOdd(A) {
         }
     }
 }
+
 function findOdd2(A) {
-  return A.reduce((a,b) => a^b)
+    return A.reduce((a, b) => a ^ b)
 }
 
 //Who likes it?
@@ -325,9 +327,9 @@ function likes(names) {
 const countBits = (n) => {
     let arr = []
     while (n > 0.9) {
-        if(n%2 !== 0) {
+        if (n % 2 !== 0) {
             arr.push(1)
-            n=n-1
+            n = n - 1
         } else {
             arr.push(0)
         }
@@ -338,4 +340,133 @@ const countBits = (n) => {
 };
 
 const countBits2 = n => n.toString(2).split('0').join('').length
+
+//Count the number of Duplicates
+// Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits
+// that occur more than once in the input string. The input string can be assumed to contain only alphabets
+// (both uppercase and lowercase) and numeric digits.
+//
+// Example
+// "abcde" -> 0 # no characters repeats more than once
+// "aabbcde" -> 2 # 'a' and 'b'
+// "aabBcde" -> 2 # 'a' occurs twice and 'b' twice (`b` and `B`)
+// "indivisibility" -> 1 # 'i' occurs six times
+// "Indivisibilities" -> 2 # 'i' occurs seven times and 's' occurs twice
+// "aA11" -> 2 # 'a' and '1'
+// "ABBA" -> 2 # 'A' and 'B' each occur twice
+
+let text = "aabbcde"
+
+function duplicateCount(text) {
+    let result = {}
+    text.toLowerCase().split('').forEach(el => {
+        result[el] = result[el] > 0 ? result[el] + 1 : 1
+    })
+    return Object.entries(result).filter(el => el[1] !== 1).length
+}
+
+// console.log(duplicateCount(text))
+
+//Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+//
+// For example:
+//
+// uniqueInOrder('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
+// uniqueInOrder('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
+// uniqueInOrder([1,2,2,3,3])       == [1,2,3]
+
+let iterable = [1, 1, 2, 3, 4, 4]
+const uniqueInOrder1 = (iterable) => {
+    console.log(iterable)
+    let arr = []
+    if (iterable) {
+        if (typeof iterable === "string") {
+            let arr = iterable.split('')
+        }
+        arr = iterable
+        let resultArray = []
+        resultArray.push(arr[0])
+        for (let i = 0; i < arr.length - 1; i++) {
+            if (arr[i] !== arr[i + 1]) {
+                resultArray.push(arr[i + 1])
+            }
+        }
+        return resultArray
+    } else {
+        return []
+    }
+}
+
+const uniqueInOrder = (iterable) => {
+    return iterable.filter((a, i) => a !== iterable[i - 1])
+}
+// console.log(uniqueInOrder(iterable))
+
+//Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence,
+// which is the number of times you must multiply the digits in num until you reach a single digit.
+//
+// For example (Input --> Output):
+//
+// 39 --> 3 (because 3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit)
+// 999 --> 4 (because 9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, and finally 1*2 = 2)
+// 4 --> 0 (because 4 is already a one-digit number)
+
+function persistence(num) {
+    let amount = 0;
+    while (num > 9) {
+        num = num.toString().split('').reduce((a, b) => a * b)
+        amount++
+    }
+    return amount
+}
+
+// console.log(persistence(39))
+
+// Complete the method/function so that it converts dash/underscore delimited words into camel casing.
+// The first word within the output should be capitalized only if the original word was capitalized
+// (known as Upper Camel Case, also often referred to as Pascal case). The next words should be always capitalized.
+//
+// Examples
+// "the-stealth-warrior" gets converted to "theStealthWarrior"
+// "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
+
+function toCamelCase(str) {
+    str = str.split('');
+    return str.map(function (el, i) {
+        if (el === '-' || el === '_') {
+            el = str[i + 1].toUpperCase();
+            str.splice(i + 1, 1);
+        }
+        return el;
+    }).join('');
+}
+
+console.log(toCamelCase("the-stealth-warrior"))
+
+//Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+//
+// Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+//
+// If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+//
+// Examples
+// "is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+// "4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+// ""  -->  ""
+
+function order(words) {
+    let wordsArray = words.split(' ')
+    const findNumber = words.match(/[1-9]/g);
+    console.log(findNumber)
+    const result = []
+    if (words.length === 0) return words
+    wordsArray.map((el, i) => {
+        let counter = (i + 1).toString()
+        const index = findNumber.indexOf(counter)
+        result.push(wordsArray[index])
+    })
+    return result.join(' ')
+}
+
+// console.log(order("is2 Thi1s T4est 3a"))
 

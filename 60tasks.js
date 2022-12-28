@@ -164,7 +164,7 @@ const longest = (str1, str2) => {
     let arrayNotUnique = [...new Set(str1), ...new Set(str2)]
     return [...new Set(arrayNotUnique)].sort().join('')
 }
-console.log(longest(str1, str2))
+// console.log(longest(str1, str2))
 
 
 //9. Given an array of words, you need to determine
@@ -181,13 +181,28 @@ const isTheSame = (arr) => {
     return res.every(el => el === res[0])
 }
 
-console.log(isTheSame(cats))
+// console.log(isTheSame(cats))
 
 
 //10.Write a function that finds the most used element in an array.
 //
 // For example:
-// const array=[7, 'z', 'z', 'z', 3, 7, 'z', 7, 'z', 3, 5, 7]; --> "z"
+const arrayForEnumeration = [7, 'x', 'x', 'x', -3, 7, 'x', 7, 'x', 3, 5, 7];
+
+// const repetitiveElement = (array) => {
+//
+// }
+// console.log(repetitiveElement(arrayForEnumeration))
+
+const repetitiveElement = (array) => {
+    const result = {}
+    array.forEach((e) => {
+        result[e] = result[e] > 0 ? result[e] + 1 : 1
+    })
+    const entries = Object.entries(result).sort((a,b) => b[1] - a[1])
+    return entries[0][0]
+}
+// console.log(repetitiveElement(arrayForEnumeration))
 
 
 //10.xx Collect all the values in a separate array
@@ -227,3 +242,56 @@ const gerTreeValues = (tree) => {
     return result
 }
 // console.log(gerTreeValues(tree))
+
+//Write a function that returns the sum like this:
+//
+// For example:
+// f(1)(2)(3) --> 6
+
+const sum1  = function (a) {
+    return function (b) {
+        if (b) {
+            return sum(a+b); // it takes an argument and return a function which again can take an argument.
+        }
+        return a; // it will keep on adding 1+2+3+4..
+    }
+};
+
+function sum2(a) {
+    let currentSum = a;
+    function f(b) {
+        currentSum += b;
+        return f;
+    }
+    f.toString = function() {
+        return currentSum;
+    };
+    return f;
+}
+
+
+// console.log(sum2(1)(2)(3))
+
+function addq(a){
+    function sum(b){
+        a =   a+b;
+        return sum;
+    }
+    sum.toString = function(){return a;}
+    return sum;
+}
+
+function add(n){
+    let addNext = function(x) {
+        return add(n + x);
+    };
+
+    addNext.valueOf = function() {
+        return n;
+    };
+
+    return addNext;
+}
+
+let sum = a => b => b ? sum(a + b) :a
+// console.log(sum(1)(2)(3)(4));
