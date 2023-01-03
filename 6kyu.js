@@ -60,9 +60,9 @@ const spinWords = (string) => {
 // The returned format must be correct in order to complete this challenge.
 //
 // Don't forget the space after the closing parentheses!
-function createPhoneNumber(numbers){
+function createPhoneNumber(numbers) {
     let format = "(xxx) xxx-xxxx";
-    for(let i = 0; i < numbers.length; i++) {
+    for (let i = 0; i < numbers.length; i++) {
         format = format.replace('x', numbers[i]);
     }
     return format;
@@ -441,7 +441,7 @@ function toCamelCase(str) {
     }).join('');
 }
 
-console.log(toCamelCase("the-stealth-warrior"))
+// console.log(toCamelCase("the-stealth-warrior"))
 
 //Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
 //
@@ -457,7 +457,7 @@ console.log(toCamelCase("the-stealth-warrior"))
 function order(words) {
     let wordsArray = words.split(' ')
     const findNumber = words.match(/[1-9]/g);
-    console.log(findNumber)
+    // console.log(findNumber)
     const result = []
     if (words.length === 0) return words
     wordsArray.map((el, i) => {
@@ -468,5 +468,4 @@ function order(words) {
     return result.join(' ')
 }
 
-// console.log(order("is2 Thi1s T4est 3a"))
-
+console.log(order("is2 Thi1s T4est 3a"))
