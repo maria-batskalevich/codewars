@@ -70,7 +70,7 @@ function maxSequence(arr) {
     return maxSum
 }
 
-console.log(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+// console.log(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
 
 //Once upon a time, on a way through the old wild mountainous west,…
 // … a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too.
@@ -135,7 +135,7 @@ function dirReduc(arr) {
     return result
 }
 
-console.log(dirReduc(arr))
+// console.log(dirReduc(arr))
 
 //Human Readable Time
 //Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (HH:MM:SS)
@@ -167,4 +167,17 @@ function humanReadable(seconds) {
     return hours + ':' + minutes + ':' + seconds;
 }
 
-console.log(humanReadable(3600))
+// console.log(humanReadable(3600))
+
+const discount = (price, disc) => {
+    return price * disc
+}
+// console.log(discount(100, 0.05))
+
+const discount2 = (disc) => {
+    return (price) => {
+        return price * disc
+    }
+}
+const clientPrice = discount2(0.05)
+console.log(clientPrice(100))

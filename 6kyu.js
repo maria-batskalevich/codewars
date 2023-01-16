@@ -68,7 +68,7 @@ function createPhoneNumber(numbers) {
     return format;
 }
 
-console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+// console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
 //Sum of Digits / Digital Root
 //Digital root is the recursive sum of all the digits in a number.
 //
@@ -164,6 +164,7 @@ function findUniq(arr) {
 // Note
 // In case of an empty array return 0. You will not be tested with invalid input (input will always be an array).
 // Order of the face (eyes, nose, mouth) elements will always be the same.
+
 function countSmileys(arr) {
     console.log(arr)
     let count = 0;
@@ -237,6 +238,7 @@ function towerBuilder(nFloors) {
 // D          500
 // M          1,000
 // Remember that there can't be more than 3 identical symbols in a row.
+
 function solution(number) {
     let rules = {
         1000: 'M',
@@ -276,6 +278,7 @@ function solution(number) {
 // [1,1,2] should return 2, because it occurs 1 time (which is odd).
 // [0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
 // [1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
+
 function findOdd(A) {
     let counts = {};
     A.forEach(x => counts[x] = (counts[x] || 0) + 1); //{1: 2, 2: 4, 3: 6, 4: 1}
@@ -468,4 +471,51 @@ function order(words) {
     return result.join(' ')
 }
 
-console.log(order("is2 Thi1s T4est 3a"))
+// console.log(order("is2 Thi1s T4est 3a"))
+
+//Duplicate Encoder
+//The goal of this exercise is to convert a string to a new string where each character in the new string
+// is "(" if that character appears only once in the original string, or ")" if that character appears more
+// than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+//
+// Examples
+// "din"      =>  "((("
+// "recede"   =>  "()()()"
+// "Success"  =>  ")())())"
+// "(( @"     =>  "))(("
+// Notes
+// Assertion messages may be unclear about what they display in some languages.
+// If you read "...It Should encode XXX", the "XXX" is the expected result, not the input!
+
+// function duplicateEncode(word){
+//     const letters = word.toLowerCase().split('');
+//     const counts = letters.reduce((acc, i) => ((acc[i] = (acc[i] || 0) + 1), acc), {});
+//     return letters.map(letter => counts[letter] === 1 ? '(' : ')').join('');
+// }
+
+const duplicateEncode = (word) => {
+    let lettersArr = word.toLowerCase().split('');
+    let result = lettersArr.reduce((acc, i) => {
+        if (acc.hasOwnProperty(i)) {
+            acc[i] += 1;
+        } else {
+            acc[i] = 1;
+        }
+        return acc;
+    }, {})
+    return lettersArr.map(el => result[el] === 1 ? '(' : ')').join('')
+}
+
+console.log(duplicateEncode('recede'))
+
+// function duplicateEncode(word){
+//     return word
+//         .toLowerCase()
+//         .split('')
+//         .map( function (a, i, w) {
+//             return w.indexOf(a) == w.lastIndexOf(a) ? '(' : ')'
+//         })
+//         .join('');
+// }
+
+
