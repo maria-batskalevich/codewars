@@ -502,20 +502,259 @@ const duplicateEncode = (word) => {
             acc[i] = 1;
         }
         return acc;
+
     }, {})
+    // console.log(result)
     return lettersArr.map(el => result[el] === 1 ? '(' : ')').join('')
 }
 
-console.log(duplicateEncode('recede'))
+// console.log(duplicateEncode('recede'))
 
-// function duplicateEncode(word){
-//     return word
-//         .toLowerCase()
-//         .split('')
-//         .map( function (a, i, w) {
-//             return w.indexOf(a) == w.lastIndexOf(a) ? '(' : ')'
-//         })
-//         .join('');
-// }
+function duplicateEncode2(word) {
+    return word
+        .toLowerCase()
+        .split('')
+        .map((el, index, arr) => {
+            return arr.indexOf(el) === arr.lastIndexOf(el) ? '(' : ')'
+        })
+        .join('')
+}
+
+// console.log(duplicateEncode2('recede'))
+
+//Sort the odd
+//Task
+// You will be given an array of numbers. You have to sort the odd numbers in ascending order
+// while leaving the even numbers at their original positions.
+//
+// Examples
+// [7, 1]  =>  [1, 7]
+// [5, 8, 6, 3, 4]  =>  [3, 8, 6, 5, 4]
+// [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  =>  [1, 8, 3, 6, 5, 4, 7, 2, 9, 0]
+
+function sortArray(array) {
+    debugger
+    const odd = array.filter((x) => x % 2).sort((a, b) => a - b);
+    return array.map((x) => x % 2 ? odd.shift() : x);
+}
+
+// console.log(sortArray([5, 8, 6, 3, 4]))
+
+//Sorting by bits
+//In this kata you're expected to sort an array of 32-bit integers in ascending order of the number of on bits they have.
+//
+// E.g Given the array [7, 6, 15, 8]
+//
+// 7 has 3 on bits (000...0111)
+// 6 has 2 on bits (000...0011)
+// 15 has 4 on bits (000...1111)
+// 8 has 1 on bit (000...1000)
+// So the array in sorted order would be [8, 6, 7, 15].
+//
+// In cases where two numbers have the same number of bits, compare their real values instead.
+//
+// E.g between 10 (...1010) and 12 (...1100), they both have the same number of on bits '2' but the integer 10 is less than 12 so it comes first in sorted order.
+//
+// Your task is to write the function sortBybit() that takes an array of integers and sort them as described above.
+//
+// Note: your solution has to sort the array in place.
+//
+// Example:
+//
+// [3, 8, 3, 6, 5, 7, 9, 1]   =>    [1, 8, 3, 3, 5, 6, 9, 7]
+
+function sortByBit(arr) {
+    const countBit = (bit) => bit.toString(2).replace(/[0]/g, '').length
+    return arr.sort((a, b) => countBit(a) === countBit(b) ? a - b : countBit(a) - countBit(b))
+}
+
+// console.log(sortByBit([3, 8, 3, 6, 5, 7, 9, 1]))
+
+//Sums of Parts
+// Let us consider this example (array written in general format):
+//
+// ls = [0, 1, 3, 6, 10]
+//
+// Its following parts:
+//
+// ls = [0, 1, 3, 6, 10]
+// ls = [1, 3, 6, 10]
+// ls = [3, 6, 10]
+// ls = [6, 10]
+// ls = [10]
+// ls = []
+// The corresponding sums are (put together in a list): [20, 20, 19, 16, 10, 0]
+//
+// The function parts_sums (or its variants in other languages) will take as parameter a list ls and return a list of the sums of its parts as defined above.
+//
+// Other Examples:
+// ls = [1, 2, 3, 4, 5, 6]
+// parts_sums(ls) -> [21, 20, 18, 15, 11, 6, 0]
+//
+// ls = [744125, 935, 407, 454, 430, 90, 144, 6710213, 889, 810, 2579358]
+// parts_sums(ls) -> [10037855, 9293730, 9292795, 9292388, 9291934, 9291504, 9291414, 9291270, 2581057, 2580168, 2579358, 0]
+// Notes
+// Take a look at performance: some lists have thousands of elements.
+// Please ask before translating.
+
+function partsSums(ls) {
+    let arr = [0];
+    ls.reverse().forEach(el => arr.push(arr[arr.length - 1] + el))
+    return arr.reverse()
+}
+
+console.log(partsSums([1, 2, 3])) // [3, 2, 1] ==> [0, 3, 5, 6]
+
+//Two Sum
+//Write a function that takes an array of numbers (integers for the tests) and a target number.
+// It should find two different items in the array that, when added together, give the target value.
+// The indices of these items should then be returned in a tuple / list (depending on your language) like so: (index1, index2).
+//
+// For the purposes of this kata, some tests may have multiple answers; any valid solutions will be accepted.
+//
+// The input will always be valid (numbers will be an array of length 2 or greater, and all of the items will be
+// numbers; target will always be the sum of two different items from that array).
+//
+// Based on: http://oj.leetcode.com/problems/two-sum/
+//
+// twoSum([1, 2, 3], 4) // returns [0, 2] or [2, 0]
+
+function twoSum(numbers, target) {
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = i + 1; j < numbers.length; j++) {
+            if (numbers[i] + numbers[j] === target) return [i, j];
+        }
+    }
+}
 
 
+// console.log(twoSum([1, 2, 3], 4))
+
+
+// Which are in?
+// Description:
+// Given two arrays of strings a1 and a2 return a sorted array r in lexicographical order of the strings of a1
+// which are substrings of strings of a2.
+//
+// #Example 1: a1 = ["arp", "live", "strong"]
+//
+// a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+//
+// returns ["arp", "live", "strong"]
+//
+// #Example 2: a1 = ["tarp", "mice", "bull"]
+//
+// a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+//
+// returns []
+//
+// Notes:
+// Arrays are written in "general" notation. See "Your Test Cases" for examples in your language.
+//
+// In Shell bash a1 and a2 are strings. The return is a string where words are separated by commas.
+//
+// Beware: r must be without duplicates.
+// Don't mutate the inputs.
+
+function inArray(array1, array2) {
+    return array1.filter((x) => array2.some((y) => y.includes(x))).sort()
+}
+
+
+//Meeting
+// John has invited people. His list is:
+// s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill";
+// Could you make a program that
+// makes this string uppercase
+// gives it sorted in alphabetical order by last name. When the last names are the same, sort them by first name.
+// Last name and first name of a guest come in the result between parentheses separated by a comma. So the result
+// of function meeting(s) will be:
+// "(CORWILL, ALFRED)(CORWILL, FRED)(CORWILL, RAPHAEL)(CORWILL, WILFRED)(TORNBULL, BARNEY)(TORNBULL, BETTY)(TORNBULL, BJON)"
+// It can happen that in two distinct families with the same family name two people have the same first name too.
+
+
+function meeting(s) {
+    return s
+        .replace(/;/gi, ' ')
+        .toUpperCase()
+        .split(' ')
+        .map(el => el.split(':').reverse().join(', '))
+        .sort()
+        .map(el => `(${el})`)
+        .join('')
+}
+
+console.log(meeting("Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"))
+
+
+// Holly cats
+// Description:
+// My granny has several cats. Most of them are wicked, some are normal and some of them are the likes of ^(~_~)^ aka holy cats.
+// So my granny asked me to separate the holy cats from the rest of the crew. But I don't know how to do it.
+// Can you help me separate the holy cats from the rest? In case there are no holy cats in the group, return an empty array.
+
+function holycats(input) {
+    return input.filter(v => v !== 'wicked').filter(v => v !== 'normal')
+}
+
+
+// //Doors in the school
+//
+//
+// In the morning all the doors in the school are closed. The school is quite big: there are N doors. Then pupils start coming. It might be hard to believe, but all of them want to study! Also, there are exactly N children studying in this school, and they come one by one.
+// When these strange children pass by some doors they change their status (i.e. Open -> Closed, Closed -> Open). Each student has their number, and each i-th student alters the status of every i-th door. For example: when the first child comes to the schools, he changes every first door (he opens all of them). The second one changes the status of every second door (he closes some doors: the 2nd, the 4th and so on). Finally, when the last one – the n-th – comes to the school, he changes the status of each n-th door (there's only one such door, though).
+// You need to count how many doors are left opened after all the students have come.
+// Example:
+// Here you can see red squares – closed doors, green – opened ones.
+// Input:
+// n – the number of doors and students, n ∈ N, n ∈ [1, 100000]
+// Output:
+// o – the number of opened doors, o ∈ N
+// doors(5)
+// Should return 2
+
+const doors2 = n => Math.sqrt(n) | 0
+
+
+// Exercise in Summing
+
+// Your task is to finish two functions, minimumSum and maximumSum, that take 2 parameters:
+// values: an array of integers with an arbitrary length; may be positive and negative
+// n: how many integers should be summed; always 0 or bigger
+// Example:
+// var values = [5, 4, 3, 2, 1];
+// minimumSum(values, 2); // should return 1+2 = 3
+// maximumSum(values, 3); // should return 3+4+5 = 12
+// All values given to the functions will be integers. Also take care of the following special cases:
+// if values is empty, both functions should return 0
+// if n is 0, both functions should also return 0
+// if n is larger than values's length, use the length instead.
+
+function minimumSum(values, n) {
+    values = values.sort((a, b) => a - b);
+    return values.slice(0, n).reduce((a, b) => a + b, 0)
+}
+
+function maximumSum(values, n) {
+    values = values.sort((a, b) => b - a);
+    return values.slice(0, n).reduce((a, b) => a + b, 0)
+}
+
+
+// Pizza pieces
+// Description:
+// In her trip to Italy, Elizabeth Gilbert made it her duty to eat perfect pizza. One day, she ordered one for dinner. And then some Italian friends appeared at her room.
+// The problem is that there were many people who ask for a piece of pizza at that moment. And she had a knife that only cuts straight.
+// Given a number K (K<=45000), help her get the maximum number of pieces possible (not necessarily of equal size) with K cuts. If K is a negative number, the result must be -1 (or Nothing in Haskell).
+// Examples
+// maxPizza(0) == 1
+// maxPizza(1) == 2
+// maxPizza(3) == 7
+
+function maxPizza(cut) {
+    if (cut < 0) return -1
+    else if (cut === 0) return 1
+    return (cut * (cut + 1) / 2) + 1
+}
+
+// console.log(maxPizza(3))
