@@ -176,12 +176,18 @@ const longest = (str1, str2) => {
 
 const cats = ["cat", "tac", "act"];
 const cats2 = ["cat", "tk", "who"]
+// const isTheSame = (arr) => {
+//     let res = arr.map(el => el.split('').sort().join(''))
+//     return res.every(el => el === res[0])
+// }
+
 const isTheSame = (arr) => {
-    let res = arr.map(el => el.split('').sort().join(''))
-    return res.every(el => el === res[0])
+    let res = arr.map(el => el.split('').sort().join('')) //[ 'act', 'act', 'act' ]
+    return res.every(el => el === res[0]) //true
 }
 
-// console.log(isTheSame(cats))
+
+console.log(isTheSame(cats))
 
 
 //10.Write a function that finds the most used element in an array.
@@ -199,10 +205,10 @@ const repetitiveElement = (array) => {
     array.forEach((e) => {
         result[e] = result[e] > 0 ? result[e] + 1 : 1
     })
-    const entries = Object.entries(result).sort((a,b) => b[1] - a[1])
+    const entries = Object.entries(result).sort((a, b) => b[1] - a[1])
     return entries[0][0]
 }
-// console.log(repetitiveElement(arrayForEnumeration))
+console.log(repetitiveElement(arrayForEnumeration))
 
 
 //10.xx Collect all the values in a separate array
@@ -243,15 +249,15 @@ const gerTreeValues = (tree) => {
 }
 // console.log(gerTreeValues(tree))
 
-//Write a function that returns the sum like this:
+//11. Write a function that returns the sum like this:
 //
 // For example:
 // f(1)(2)(3) --> 6
 
-const sum1  = function (a) {
+const sum1 = function (a) {
     return function (b) {
         if (b) {
-            return sum(a+b); // it takes an argument and return a function which again can take an argument.
+            return sum(a + b); // it takes an argument and return a function which again can take an argument.
         }
         return a; // it will keep on adding 1+2+3+4..
     }
@@ -259,11 +265,13 @@ const sum1  = function (a) {
 
 function sum2(a) {
     let currentSum = a;
+
     function f(b) {
         currentSum += b;
         return f;
     }
-    f.toString = function() {
+
+    f.toString = function () {
         return currentSum;
     };
     return f;
@@ -272,26 +280,78 @@ function sum2(a) {
 
 // console.log(sum2(1)(2)(3))
 
-function addq(a){
-    function sum(b){
-        a =   a+b;
+function addq(a) {
+    function sum(b) {
+        a = a + b;
         return sum;
     }
-    sum.toString = function(){return a;}
+
+    sum.toString = function () {
+        return a;
+    }
     return sum;
 }
 
-function add(n){
-    let addNext = function(x) {
+function add(n) {
+    let addNext = function (x) {
         return add(n + x);
     };
 
-    addNext.valueOf = function() {
+    addNext.valueOf = function () {
         return n;
     };
 
     return addNext;
 }
 
-let sum = a => b => b ? sum(a + b) :a
+let sum = a => b => b ? sum(a + b) : a
 // console.log(sum(1)(2)(3)(4));
+
+//12. Write a function with two parameters that creates an array of elements,
+// representing the sum of the corresponding elements of the given arrays.
+// const array1 = [1, 2, 3;
+// const array2 = [4, 5, 6];
+// func(array1,array2) // [5,7,9,4,5]
+
+const sumOfTwoArrays = (arr1, arr2) => {
+    let res = []
+    let count;
+    if (arr1.length >= arr2.length) {
+        count = arr1.length
+    } else {
+        count = arr2.length
+    }
+    for (let i = 0; i < count; i++) {
+        if (arr1[i] === undefined) {
+            arr1.push(0)
+        } else {
+            arr2.push(0)
+        }
+        res.push(arr1[i] + arr2[i])
+    }
+    return res
+
+}
+// console.log(sumOfTwoArrays([1, 2, 3, 4], [1, 2, 3, 4, 5]))
+
+
+// 13. Write a function countIdentic(arr) that returns the number of duplicate elements in an array.
+const countIdentic = (arr) => {
+    let resultArr = {}
+    arr.forEach(el => {
+        resultArr[el] = resultArr[el] > 0 ? resultArr[el] + 1 : 1
+    })
+    console.log(resultArr)
+    let res = Object.entries(resultArr).sort((a, b) => b[1] - a[1])
+    return res[0][1]
+}
+// console.log(countIdentic([15, 14, 13, 19, 13, 14, 14, 14, 7, 9, 9]))
+
+// 14. Write a union function that returns an array containing only the unique elements from each array.
+const union = (arr1, arr2) => {
+    // return new Set([...arr1, ...arr2])
+    let resultArr = [...arr1, ...arr2]
+    return resultArr.filter((el, index, arr) => index === arr.indexOf(el) )
+}
+
+console.log(union([1, 2, 3, 4, 5], [4, 5, 6, 7, 8]))
