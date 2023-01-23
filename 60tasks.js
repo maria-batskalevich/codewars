@@ -351,7 +351,117 @@ const countIdentic = (arr) => {
 const union = (arr1, arr2) => {
     // return new Set([...arr1, ...arr2])
     let resultArr = [...arr1, ...arr2]
-    return resultArr.filter((el, index, arr) => index === arr.indexOf(el) )
+    return resultArr.filter((el, index, arr) => index === arr.indexOf(el))
 }
 
-console.log(union([1, 2, 3, 4, 5], [4, 5, 6, 7, 8]))
+// console.log(union([1, 2, 3, 4, 5], [4, 5, 6, 7, 8]))
+
+//15. Write a function compareNumbers(arr) that returns an array whose elements are sorted in descending order of their values.
+const compareNumbers = (arr) => {
+    return arr.sort((a, b) => a - b)
+}
+
+// console.log(compareNumbers([3, 8, 7, 6, 5, -4, 3, 2, 1]))
+
+//16. Write a function sumOfSquares(arr) that returns the sum of squares of array values.
+
+const sumOfSquares = (arr) => {
+    const sqr = arr.map(el => el ** 2)
+    let sum = sqr.reduce((el, acc) => el + acc)
+    return sum
+}
+// console.log(sumOfSquares([1, 2, 3, 4, 5]))
+
+// 17. Write a function `removeDuplicates(arr)` that returns an array,
+// in which duplicate elements have been removed from the arr array.
+
+const removeDuplicates = (arr) => {
+    // return new Set(arr)
+    return arr.filter((el, index, arr) => index === arr.indexOf(el))
+}
+// console.log(removeDuplicates(["php", "php", "css", "css",
+//     "script", "script", "html", "html", "java"
+// ]))
+
+//18. Write a colonOdd(num) function that takes num in
+// as an argument and inserts a colon (:) between two odd numbers.
+// For example, if the number 55639217 is entered, then the output should be 5:563:921:7
+
+const colonOdd = (num) => {
+    const strArr = num.toString().split('')
+    for (let i = 0; i < strArr.length; i++) {
+        if (strArr[i] % 2 && strArr[i + 1] % 2) {
+            strArr[i] = strArr[i] + ':'
+        }
+    }
+    return strArr.join('')
+}
+// console.log(colonOdd(55639217))
+
+//19. Write a function `copyArr(arr)` that copies an array without changing the original.
+
+const copyArr = (arr) => {
+    return [...arr]
+    // return arr.map(el => el)
+}
+// console.log(copyArr([1, 2, 3]))
+
+//20. Write a function `comparison(str1, str2)` that compares
+// strings are case-insensitive.
+
+const comparison = (str1, str2) => {
+    return str1.toLowerCase() === str2.toLowerCase()
+}
+
+// console.log(comparison('string', 'StRiNg')) // true
+
+//21. Write a function zeros(num, len) that pads a numeric value with an extra "+" or "-" sign, depending on the
+// argument passed, with zeros to the specified length.
+
+const zeros = (num, len, sign) => {
+    let numsArr = num.toString().split('')
+    let countOfZero = len - numsArr.length
+    let newArr = []
+    for (let i = 0; i < countOfZero; i++) {
+        newArr.push(0)
+    }
+    let res = [...sign, ...newArr, ...numsArr].join('')
+    return res
+}
+
+const zeros2 = (num, len, sign = '') => num.toString().length === len ? sign + String(num) : zeros('0' + num, len, sign)
+// console.log(zeros(333, 3, '+'))
+// console.log(zeros2(333, 3, '+'))
+
+//22. Write a `strip(str)` function that removes all extra spaces from the string str.
+const strip = (str) => {
+    return str.split(' ').filter(el => el !== '').join(' ')
+}
+// console.log(strip("    Pasha is a good      boy     "))
+
+// 23. Write a `cutString(str, n)` function that removes the extra
+// words from the string str, leaving n words in it.
+//
+// For example:
+// const str = "Gravity is applied to the body's center of mass";`
+// cutString(str, 3) --> "Gravity is applied"
+
+const cutString = (str, n) => {
+    return str.split(' ').slice(0, n).join(' ')
+}
+// console.log(cutString('cat dog fox bear', 2))
+
+//24. Write a function `alphabetize(str)` that returns a string,
+// sorting its characters in alphabetical order.
+const alphabetize = (str) => {
+    return str.split('').sort()
+}
+// console.log(alphabetize("redev"))
+
+//25. Write a function `uniqueLetters(str)` that returns a string,
+// leaving only unique characters in it, i.e. occurring once in a line.
+
+const uniqueLetters = (str) => {
+    return str.split('').filter((el, index, arr) => index === arr.indexOf(el)).join('')
+}
+console.log(uniqueLetters('anaconda'))
