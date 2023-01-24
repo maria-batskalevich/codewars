@@ -223,3 +223,38 @@ function incrementString1(str){
 }
 
 console.log(incrementString1('009'))
+
+//Number of trailing zeros of N!
+//Write a program that will calculate the number of trailing zeros in a factorial of a given number.
+//
+// N! = 1 * 2 * 3 *  ... * N
+//
+// Be careful 1000! has 2568 digits...
+//
+// For more info, see: http://mathworld.wolfram.com/Factorial.html
+//
+// Examples
+// zeros(6) = 1
+// # 6! = 1 * 2 * 3 * 4 * 5 * 6 = 720 --> 1 trailing zero
+//
+// zeros(12) = 2
+// # 12! = 479001600 --> 2 trailing zeros
+
+
+function zeros(n) {
+    let zeros = typeof n === 'bigint' ? 0n : 0;
+    const maker = (n, x) => {
+        let res = Math.floor(n / x);
+        if (res > 0) {
+            zeros += res;
+            return maker(n, x * (typeof n === 'bigint' ? 5n : 5))
+        }
+    }
+    maker(n, typeof n === 'bigint' ? 5n : 5);
+    return zeros;
+}
+
+// function zeros (n) {
+//     return n < 5 ? 0 : Math.floor(n / 5) + zeros(n / 5);
+// }
+console.log()

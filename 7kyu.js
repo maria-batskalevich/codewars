@@ -19,18 +19,21 @@ function sumTwoSmallestNumbers(numbers) {
 // Examples
 // 5   =>  7
 // 12  =>  13
-function nextPrime(n){
-    let count=0;
-    for(let i=n+1;i>0;i++){
-        if (isPrime(i)){count = i; break}
+function nextPrime(n) {
+    let count = 0;
+    for (let i = n + 1; i > 0; i++) {
+        if (isPrime(i)) {
+            count = i;
+            break
+        }
     }
     return count
 }
 
 function isPrime(n) {
     let rt = Math.sqrt(n);
-    for(let i = 2; i <= rt; i++) {
-        if(n % i === 0) return false;
+    for (let i = 2; i <= rt; i++) {
+        if (n % i === 0) return false;
     }
     return n !== 1;
 }
@@ -45,7 +48,7 @@ function isPrime(n) {
 // sort(['z', 'x', 'y'], [0, 2, 1]) => ['z', 'y', 'x']
 function sort(initialArray, sortingArray) {
     let arr = [];
-    for(let i = 0; i < initialArray.length; i++)
+    for (let i = 0; i < initialArray.length; i++)
         arr[sortingArray[i]] = initialArray[i]
     return arr
 }
@@ -65,14 +68,14 @@ function sort(initialArray, sortingArray) {
 // Extension
 // If you wish, you could also fix the sort() method for arrays such that it also works on String arrays
 // (sorting them into alphabetical order) but please note that it is not required and will not be tested.
-Array.prototype.sort = function(){
-    const arr=this.slice();
-    for (let i=0; i<arr.length;i++){
-        for (let j=0; j<arr.length;j++){
-            if (arr[j]>arr[j+1]){
-                let temp = arr[j+1];
-                arr[j+1]=arr[j];
-                arr[j]=temp;
+Array.prototype.sort = function () {
+    const arr = this.slice();
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = temp;
             }
         }
     }
@@ -108,19 +111,19 @@ Array.prototype.sort = function(){
 // null
 function grid(n) {
 
-    if(n < 0) return null;
+    if (n < 0) return null;
 
     let letters = "abcdefghijklmnopqrstuvwxyz";
     let result = [];
 
-    while(n * n > letters.length) {
+    while (n * n > letters.length) {
         letters += letters;
     }
 
-    for(let i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         let row = '';
 
-        for(let j = i; j < n + i; j++) {
+        for (let j = i; j < n + i; j++) {
             row = row + letters.substr(j, 1)
         }
 
@@ -140,14 +143,14 @@ function grid(n) {
 // Given the amount of cash on hand, the initial wager, and the number of rounds played, return the amount of money that I'll have left after our gam(bl)ing session has concluded.
 //
 // If I can't afford to pay up, return "I'll pay you back later" instead ;)
-function doubleOrNothing(cash, wager, losses){
-    for(let i = 1; i< losses; i++) {
-        wager *=2
+function doubleOrNothing(cash, wager, losses) {
+    for (let i = 1; i < losses; i++) {
+        wager *= 2
     }
-    if(wager > cash){
+    if (wager > cash) {
         return "I'll pay you back later"
-    }  else {
-        return cash-wager
+    } else {
+        return cash - wager
     }
 }
 
@@ -188,8 +191,8 @@ function doubleOrNothing(cash, wager, losses){
 //   [ '', 'a', '', '', '', '', '', '' ] ]) // => "The Mitochondria is the powerhouse of the cell"
 function arrAdder(arr) {
     let newArrStr = []
-    for(let i = 0; i<arr[0].length; i++){
-        newArrStr[i] = arr.map(m=> m[i] ).join('')
+    for (let i = 0; i < arr[0].length; i++) {
+        newArrStr[i] = arr.map(m => m[i]).join('')
 
     }
     return newArrStr.join(' ')
@@ -210,10 +213,10 @@ function arrAdder(arr) {
 //
 // Input >> Output Examples
 // minimumSteps({1, 10, 12, 9, 2, 3}, 6)  ==>  return (2)
-function minimumSteps(numbers, value){
-    numbers=numbers.sort((a,b)=>a-b)
-    for (let i=1;i<=numbers.length;i++){
-        if (numbers.slice(0,i).reduce((a,b)=>a+b,0)>=value) return i-1
+function minimumSteps(numbers, value) {
+    numbers = numbers.sort((a, b) => a - b)
+    for (let i = 1; i <= numbers.length; i++) {
+        if (numbers.slice(0, i).reduce((a, b) => a + b, 0) >= value) return i - 1
     }
 }
 
@@ -221,8 +224,8 @@ function minimumSteps(numbers, value){
 //You will be given an array and a limit value. You must check that all values in the array are below or equal to the limit value. If they are, return true. Else, return false.
 //
 // You can assume all values in the array are numbers.
-function smallEnough(a, limit){
-    return a.every(m=> m<=limit)
+function smallEnough(a, limit) {
+    return a.every(m => m <= limit)
 }
 
 //Ordered Count of Characters
@@ -262,7 +265,7 @@ function printerError(s) {
     let correctLetters = 'abcdefghijklm'
     let correctArr = correctLetters.split('')
     let count = 0
-    arr.map(m => !correctArr.includes(m) ? count++ : count+=0)
+    arr.map(m => !correctArr.includes(m) ? count++ : count += 0)
     return `${count}/${s.length}`
 }
 
@@ -296,9 +299,9 @@ function longest(s1, s2) {
 function leastLarger(a, i) {
     let min = Infinity
     let result = -1
-    for(let index = 0; index<=a.length; index++){
-        if(a[index]> a[i] && a[index]< min){
-            min=a[index]
+    for (let index = 0; index <= a.length; index++) {
+        if (a[index] > a[i] && a[index] < min) {
+            min = a[index]
             result = index
         }
     }
@@ -337,24 +340,24 @@ function leastLarger(a, i) {
 // Note: no error checking is needed
 //
 // Any feedback would be much appreciated
-const Block = function (data){
+const Block = function (data) {
     this.width = data[0]
     this.length = data[1]
     this.height = data[2]
 
-    this.getWidth = function() {
+    this.getWidth = function () {
         return this.width
     }
-    this.getLength = function() {
+    this.getLength = function () {
         return this.length
     }
-    this.getHeight = function() {
+    this.getHeight = function () {
         return this.height
     }
-    this.getVolume = function(){
-        return this.width*this.length*this.height
+    this.getVolume = function () {
+        return this.width * this.length * this.height
     }
-    this.getSurfaceArea = function() {
+    this.getSurfaceArea = function () {
         return 2 * (this.width + this.length) * this.height + 2 * this.width * this.length
     }
 }
@@ -381,7 +384,7 @@ function rangeBitCount(a, b) {
     for (let i = a; i <= b; i++) {
         arr.push(i);
     }
-    let arrayOfOne = String(arr.map(m => m.toString(2))).split('').filter(f=> (f !== ',')).map(m => +m)
+    let arrayOfOne = String(arr.map(m => m.toString(2))).split('').filter(f => (f !== ',')).map(m => +m)
     let sum = 0;
     arrayOfOne.forEach(item => {
         sum += item
@@ -396,8 +399,8 @@ function rangeBitCount(a, b) {
 //
 // solution([1, 2, 10, 50, 5]); // should return [1,2,5,10,50]
 // solution(null); // should return []
-function solution(nums){
-    return nums !== null ? nums.sort((a,b) => a-b) : []
+function solution(nums) {
+    return nums !== null ? nums.sort((a, b) => a - b) : []
 }
 
 //Jaden Casing Strings
@@ -412,8 +415,8 @@ function solution(nums){
 String.prototype.toJadenCase = function () {
     var newStr = "";
 
-    this.split(" ").forEach(function(s) {
-        newStr = newStr + " " + s.substring(0,1).toUpperCase() + s.substring(1);
+    this.split(" ").forEach(function (s) {
+        newStr = newStr + " " + s.substring(0, 1).toUpperCase() + s.substring(1);
     });
 
     return newStr.substr(1);
@@ -449,10 +452,10 @@ function numberJoy(n) {
 // function min(a, b){
 //   return (a<b)?a:b;
 // }
-function min(a, b){
-    if(isNaN(a)||isNaN(b)) {
+function min(a, b) {
+    if (isNaN(a) || isNaN(b)) {
         return NaN
-    } else if(a<b){
+    } else if (a < b) {
         return +a
     } else {
         return +b
@@ -465,6 +468,29 @@ function min(a, b){
 // For example, if we run 9119 through the function, 811181 will come out, because 92 is 81 and 12 is 1.
 //
 // Note: The function accepts an integer and returns an integer
-function squareDigits(num){
-    return +num.toString().split('').map(el=> el**2).join('')
+function squareDigits(num) {
+    return +num.toString().split('').map(el => el ** 2).join('')
 }
+
+//Factorial
+//In mathematics, the factorial of a non-negative integer n, denoted by n!, is the product of all positive integers
+// less than or equal to n. For example: 5! = 5 * 4 * 3 * 2 * 1 = 120. By convention the value of 0! is 1.
+//
+// Write a function to calculate factorial for a given input. If input is below 0 or above 12 throw an exception
+// of type ArgumentOutOfRangeException (C#) or IllegalArgumentException (Java) or RangeException (PHP) or throw
+// a RangeError (JavaScript) or ValueError (Python) or return -1 (C).
+
+function factorial(n) {
+    let arr = []
+    if (n === 0) {
+        return 1
+    } else if (n < 0 || n > 12) {
+        throw new RangeError("The argument must be between 0 and 12");
+    }
+    for (let i = 1; i <= n; i++) {
+        arr.push(i)
+    }
+    return arr.reduce((el, acc) => el * acc)
+}
+
+console.log(factorial(0))
