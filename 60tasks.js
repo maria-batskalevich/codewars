@@ -187,7 +187,7 @@ const isTheSame = (arr) => {
 }
 
 
-console.log(isTheSame(cats))
+// console.log(isTheSame(cats))
 
 
 //10.Write a function that finds the most used element in an array.
@@ -208,7 +208,7 @@ const repetitiveElement = (array) => {
     const entries = Object.entries(result).sort((a, b) => b[1] - a[1])
     return entries[0][0]
 }
-console.log(repetitiveElement(arrayForEnumeration))
+// console.log(repetitiveElement(arrayForEnumeration))
 
 
 //10.xx Collect all the values in a separate array
@@ -367,8 +367,8 @@ const compareNumbers = (arr) => {
 
 const sumOfSquares = (arr) => {
     const sqr = arr.map(el => el ** 2)
-    let sum = sqr.reduce((el, acc) => el + acc)
-    return sum
+    return sqr.reduce((el, acc) => el + acc)
+
 }
 // console.log(sumOfSquares([1, 2, 3, 4, 5]))
 
@@ -425,8 +425,7 @@ const zeros = (num, len, sign) => {
     for (let i = 0; i < countOfZero; i++) {
         newArr.push(0)
     }
-    let res = [...sign, ...newArr, ...numsArr].join('')
-    return res
+    return [...sign, ...newArr, ...numsArr].join('')
 }
 
 const zeros2 = (num, len, sign = '') => num.toString().length === len ? sign + String(num) : zeros('0' + num, len, sign)
@@ -464,4 +463,35 @@ const alphabetize = (str) => {
 const uniqueLetters = (str) => {
     return str.split('').filter((el, index, arr) => index === arr.indexOf(el)).join('')
 }
-console.log(uniqueLetters('anaconda'))
+// console.log(uniqueLetters('anaconda'))
+
+// Write a `startsWith()` function that determines whether a string starts with the characters of another string,
+// returning true or false as appropriate.
+//     let str = 'abc def ghi jkl mno pqr stu';
+// For example:
+//     str.startsWith('abc') -->
+
+const startsWith = (str1, str2) => {
+    return str1.includes(str2, [0, str2.length])
+}
+// console.log(startsWith('abc def ghi jkl mno pqr stu', 'abc'))
+
+//Write a function capitalizeFirstLetter(str),
+// which converts the first character of the string to uppercase.
+
+const capitalizeFirstLetter = (str) => {
+    return str.split('').map(el => el === str[0] ? el.toUpperCase() : el).join('')
+}
+// console.log(capitalizeFirstLetter('abc'))
+
+//Write a function `isUpperCase(str, character)` that determines if
+// in which case the character of the string is written at the specified position.
+// If it is written in upper case, return true, if in lower case, return false.
+//
+// For example:
+// isUpperCase('JavaScript tasks', 6); --> true
+
+const isUpperCase = (str, character) => {
+    return str.charAt(character).toUpperCase() === str.charAt(character)
+}
+console.log(isUpperCase('tasks JavaScript', 6))
