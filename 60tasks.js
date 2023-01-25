@@ -465,7 +465,7 @@ const uniqueLetters = (str) => {
 }
 // console.log(uniqueLetters('anaconda'))
 
-// Write a `startsWith()` function that determines whether a string starts with the characters of another string,
+//26. Write a `startsWith()` function that determines whether a string starts with the characters of another string,
 // returning true or false as appropriate.
 //     let str = 'abc def ghi jkl mno pqr stu';
 // For example:
@@ -476,7 +476,7 @@ const startsWith = (str1, str2) => {
 }
 // console.log(startsWith('abc def ghi jkl mno pqr stu', 'abc'))
 
-//Write a function capitalizeFirstLetter(str),
+//27. Write a function capitalizeFirstLetter(str),
 // which converts the first character of the string to uppercase.
 
 const capitalizeFirstLetter = (str) => {
@@ -484,7 +484,7 @@ const capitalizeFirstLetter = (str) => {
 }
 // console.log(capitalizeFirstLetter('abc'))
 
-//Write a function `isUpperCase(str, character)` that determines if
+//28. Write a function `isUpperCase(str, character)` that determines if
 // in which case the character of the string is written at the specified position.
 // If it is written in upper case, return true, if in lower case, return false.
 //
@@ -494,4 +494,66 @@ const capitalizeFirstLetter = (str) => {
 const isUpperCase = (str, character) => {
     return str.charAt(character).toUpperCase() === str.charAt(character)
 }
-console.log(isUpperCase('tasks JavaScript', 6))
+// console.log(isUpperCase('tasks JavaScript', 6))
+
+//29. Your task is to count the cats hidden in the backyard (represented in 2D Array format)
+// Cats are good at hiding, but their ears (''^^") are visible.
+// Your task is to write a function (countCats) that will count cats. Good luck!
+//
+// The number of cats found must be `number`.
+// If no cats are found, the function should return `0`
+//
+// For example:
+// countCats([[0,1,"^^"],[9,"^^",2],["^^",8,7]]) --> 3
+
+const countCats = (arr) => {
+    let count = 0
+    arr.forEach(el => el.includes('^^') ? count++ : el)
+    return count
+}
+// console.log(countCats([[0, 1, "^^"], [9, "^^", 2], ["^^", 8, 7]]))
+
+// 30. Write a function to check if a string is a palindrome.
+
+const ifStringPalindrome = (str) => {
+    return str === str.split('').reverse().join('')
+}
+// console.log(ifStringPalindrome('abba'))
+
+//31. Write a function that returns the sum of the two smallest positive numbers,
+// given an array of at least 4 positive numbers.
+//
+// For example:
+// [12,423,54,1235,3,15,2,52] --> 5
+
+const sumOfTwoSmallestNumbers = (arr) => {
+    let sortArr =  arr.sort((a,b) => a - b).filter(el => el > 0)
+    return sortArr[0] + sortArr[1]
+}
+// console.log(sumOfTwoSmallestNumbers([12,423,54,1235,3,-1,2,52])) //5
+
+//32. Write a function that takes a number n (n > 0) and
+// returns a reverse sequence string from n to 1.
+//
+//
+// For example: if n = 5 the output should be "5 4 3 2 1"
+
+const reverseSequenceString = (n) => {
+    let res = []
+    for(let i = n; i >=1; i--) {
+        res.push(i)
+    }
+    return res.join(' ')
+}
+// console.log(reverseSequenceString(5)) //'5, 4, 3, 2, 1'
+
+//In this task, you need to remove all elements of the second array from one array.
+//
+// For example:
+// arrayDiff([1,2],[1]) --> [2]
+// arrayDiff([1,2,2,2,3,4],[2,3]) --> [1,4]
+
+const arrayDiff = (arr1, arr2) => {
+    return arr1.filter(el => !arr2.includes(el))
+}
+console.log(arrayDiff([1,2, 3, 4, 5], [1, 5])) // [2, 3, 4]
