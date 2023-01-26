@@ -527,7 +527,7 @@ const ifStringPalindrome = (str) => {
 // [12,423,54,1235,3,15,2,52] --> 5
 
 const sumOfTwoSmallestNumbers = (arr) => {
-    let sortArr =  arr.sort((a,b) => a - b).filter(el => el > 0)
+    let sortArr = arr.sort((a, b) => a - b).filter(el => el > 0)
     return sortArr[0] + sortArr[1]
 }
 // console.log(sumOfTwoSmallestNumbers([12,423,54,1235,3,-1,2,52])) //5
@@ -540,14 +540,14 @@ const sumOfTwoSmallestNumbers = (arr) => {
 
 const reverseSequenceString = (n) => {
     let res = []
-    for(let i = n; i >=1; i--) {
+    for (let i = n; i >= 1; i--) {
         res.push(i)
     }
     return res.join(' ')
 }
 // console.log(reverseSequenceString(5)) //'5, 4, 3, 2, 1'
 
-//In this task, you need to remove all elements of the second array from one array.
+//33. In this task, you need to remove all elements of the second array from one array.
 //
 // For example:
 // arrayDiff([1,2],[1]) --> [2]
@@ -556,4 +556,67 @@ const reverseSequenceString = (n) => {
 const arrayDiff = (arr1, arr2) => {
     return arr1.filter(el => !arr2.includes(el))
 }
-console.log(arrayDiff([1,2, 3, 4, 5], [1, 5])) // [2, 3, 4]
+// console.log(arrayDiff([1, 2, 3, 4, 5], [1, 5])) // [2, 3, 4]
+
+//34. Write a function that converts a string from camelCase to camel_case
+const convertString = (str) => {
+    let arr = str.toLowerCase().split('')
+    arr.splice(5, 0, '_')
+    return arr.join('')
+}
+// console.log(convertString('camelCase')) // 'camel_case'
+
+//35. Your task is to sort the given string.
+// Each word in the line will contain one number.
+// This number is the position the word should occupy in the result.
+//
+// Note: numbers can be from 1 to 9.
+// So 1 will be the first word (not 0).
+//
+// If the input string is empty, return an empty string.
+// The words in the input string will only contain consecutive numbers.
+//
+// For example:
+// "is2 Thi1s T4est 3a" -> "Thi1s is2 3a T4est"
+
+const sortByGivenNumbers = (str) => {
+    let arr = str.split(' ')
+    let findNumber = str.match(/[1-9]/g)
+    let res = []
+    if (arr.length === 0) return str
+    arr.map((el, i) => {
+        let counter = (i + 5).toString()
+        let index = findNumber.indexOf(counter)
+        res.push(arr[index])
+    })
+    return res.join(' ')
+}
+// console.log(sortByGivenNumbers("is6 Thi5s T8est 7a")) //"Thi5s is6 7a T8est"
+
+//36. Write a function that takes a string parameter and
+// reverses letters in words.
+// All spaces in the string must be preserved.
+//
+// For example:
+// "This is an example!" -> "sihT si na !elpmaxe"
+
+const reverseLetters = (str) => {
+    return str.split(' ').map(el => el.split('').reverse().join('')).join(' ')
+}
+console.log(reverseLetters("This is an example!"))
+
+//37. Given a set of array of numbers, return the additive inverse of each element.
+// Every positive becomes a negative and every negative becomes a positive.
+//
+// For example:
+//   invert([-1,-2,-4,-5]) --> [1,2,4,5]
+//   invert([1,2,4,5]) --> [-1,-2,-4,-5]
+//   invert([1,-2,4,-5]) --> [-1,2,-4,5]
+//
+// You can assume that all values are integers.
+// Don't change the input array
+
+const invert = (arr) => {
+    return arr.map(el => el - 2 * el)
+}
+console.log(invert([1,-2,4,-5])) //[-1,2,-4,5]
