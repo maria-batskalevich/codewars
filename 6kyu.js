@@ -684,7 +684,7 @@ function meeting(s) {
         .join('')
 }
 
-console.log(meeting("Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"))
+// console.log(meeting("Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"))
 
 
 // Holly cats
@@ -759,3 +759,9 @@ function maxPizza(cut) {
 }
 
 // console.log(maxPizza(3))
+
+const sortByGivenNumbers2 = (str) => {
+    return str.split(' ').map(el => el.replace(/[a-zа-яё]/gi, '') + el).sort().map(el => el.slice(1)).join(' ')
+}
+console.log(sortByGivenNumbers2("is6 Thi5s T8est 7a")) //"Thi5s is6 7a T8est"
+

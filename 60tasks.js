@@ -593,6 +593,11 @@ const sortByGivenNumbers = (str) => {
 }
 // console.log(sortByGivenNumbers("is6 Thi5s T8est 7a")) //"Thi5s is6 7a T8est"
 
+const sortByGivenNumbers2 = (str) => {
+    return str.split(' ').map(el => el.replace(/[a-zа-яё]/gi, '') + el).sort().map(el => el.slice(1)).join(' ')
+}
+// console.log(sortByGivenNumbers2("is6 Thi5s T8est 7a")) //"Thi5s is6 7a T8est"
+
 //36. Write a function that takes a string parameter and
 // reverses letters in words.
 // All spaces in the string must be preserved.
@@ -603,7 +608,7 @@ const sortByGivenNumbers = (str) => {
 const reverseLetters = (str) => {
     return str.split(' ').map(el => el.split('').reverse().join('')).join(' ')
 }
-console.log(reverseLetters("This is an example!"))
+// console.log(reverseLetters("This is an example!"))
 
 //37. Given a set of array of numbers, return the additive inverse of each element.
 // Every positive becomes a negative and every negative becomes a positive.
@@ -619,4 +624,89 @@ console.log(reverseLetters("This is an example!"))
 const invert = (arr) => {
     return arr.map(el => el - 2 * el)
 }
-console.log(invert([1,-2,4,-5])) //[-1,2,-4,5]
+// console.log(invert([1, -2, 4, -5])) //[-1,2,-4,5]
+
+//38. Can you find a needle in a haystack?
+// Write a findNeedle function that takes an array full of garbage,
+// but containing one needle.
+//
+// After your function finds the needle,
+// it should return a message (as a string) that says:
+//
+// "Found a needle in position" plus the index by which the needle was found
+//
+// findNeedle(["bla","wekmvever","needle","bntyn"]) --> "Found the needle at position 2"
+
+const findANeedle = (arr) => {
+    return `Found the needle at position ${arr.indexOf('needle')}`
+}
+// console.log(findANeedle(["bla", "wekmvever", "needle", "bntyn"]))
+
+//39. The simple function, which takes a string of words as a parameter,
+// returns the length of the shortest word
+//
+// For example:
+// simple("Redev is about discipline") --> 2
+const simple = (str) => {
+    return str.split(' ').map(el => el.length).sort((a, b) => a - b)[0]
+}
+// console.log(simple("Redev is about discipline")) //2
+
+// 40. Write a function that returns the minimum and
+// the maximum value of the given array.
+//
+// For example:
+// [1, 5, 8, 10, 35, 100] --> [1, 100]
+// [-5, -7, -2, 5] --> [-7, 5]
+
+const minMaxFunc = (arr) => {
+    arr = arr.sort((a, b) => a - b)
+    return [arr[0], arr[arr.length - 1]]
+}
+// console.log(minMaxFunc([-5, -7, -2, 5])) //[-7, 5]
+
+//41. Jaden Smith, son of Will Smith, is the star of such films,
+// as "Karate Kid" (2010) and "After the Earth" (2013).
+// Jayden is also known for his philosophy, which he shares on Twitter.
+// When he posts on Twitter, he capitalizes every word.
+// Look at the example below.
+//
+// Your task is to convert the strings to the way they were
+// would be written by Jaden Smith.
+// The lines are actual quotes from Jaden Smith,
+// but they are not capitalized as he originally typed them.
+//
+// For example:
+// toJadenCase('write code is cool') --> 'Write Code Is Cool'
+
+const toJadenCase = (str) => {
+    return str.split(' ').map(el => el[0].toUpperCase() + el.slice(1)).join(' ')
+}
+// console.log(toJadenCase('write code is cool'))
+
+//41. ATMs accept 4 or 6 digit PIN codes,
+// and PIN codes cannot contain anything other than 4 digits or 6 digits.
+//
+// If the correct PIN string is passed to the function,
+// return `true`, otherwise return `false`.
+//
+// For example:
+// correctPin('5567') --> true
+// correctPin('5432567') --> false
+const correctPin = (str) => {
+    let nums = str.match(/^\d+$/)
+    return !!(nums && (str.length === 4 || str.length === 6))
+}
+// console.log(correctPin('584447'))
+
+//43. In this small task, you are given a string of numbers,
+// separated by spaces, and you must return the largest and smallest number.
+//
+// For example:
+// list("4 5 29 54 4 0 -123 666 -64 1 -3 6 -6") --> "666 -123"
+
+const list = (str) => {
+    str = str.split(' ').sort((a,b) => b - a)
+    return [str[0], str[str.length-1]].join(' ')
+}
+console.log(list("4 5 29 54 4 0 -123 666 -64 1 -3 6 -6")) //"666 -123"
