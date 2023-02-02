@@ -706,7 +706,24 @@ const correctPin = (str) => {
 // list("4 5 29 54 4 0 -123 666 -64 1 -3 6 -6") --> "666 -123"
 
 const list = (str) => {
-    str = str.split(' ').sort((a,b) => b - a)
-    return [str[0], str[str.length-1]].join(' ')
+    str = str.split(' ').sort((a, b) => b - a)
+    return [str[0], str[str.length - 1]].join(' ')
 }
-console.log(list("4 5 29 54 4 0 -123 666 -64 1 -3 6 -6")) //"666 -123"
+// console.log(list("4 5 29 54 4 0 -123 666 -64 1 -3 6 -6")) //"666 -123"
+
+//44. Your task is to write a function that takes
+// as a string parameter and increments each "letter" of the string
+// by the number of positions it occupies.
+//
+// For example:
+// accum("abcd") --> "A-Bb-Ccc-Dddd"
+// accum("RqaEzty") --> "R-Qq-Aaa-Eeee-Zzzzz-Ttttt-Yyyyyyy"
+// accum("cwAt") --> "C-Ww-Aaa-Tttt"
+
+const capitalizeTheFirstLetter = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+const accum = (str) => str
+    .split('')
+    .map((word, i) => capitalizeTheFirstLetter(Array(i + 2).join(word).toLowerCase()))
+    .join('-');
+
+// console.log(accum("abcd"))
