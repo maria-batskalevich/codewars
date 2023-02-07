@@ -727,3 +727,38 @@ const accum = (str) => str
     .join('-');
 
 // console.log(accum("abcd"))
+
+//Imagine that you and your friends decided to create a dream team.
+// This team should have a cool secret name,
+// which contains encrypted information about it.
+// For example, it could be the first letters of its member names in uppercase,
+// sorted alphabetically.
+// Your task is to write a createDreamTeam(members) function,
+// which returns the name of the created command (string)
+// based on the names of its members (Array).
+// Good luck!
+//
+// Member names must be strings.
+// Values of other types should be ignored.
+// If the member type is incorrect, the function must return false.
+//
+// For example:
+// createDreamTeam(['Matt', 'Ann', 'Dmitry', 'Max']) --> 'ADMM'
+// createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]) --> 'LOO'
+
+const createDreamTeam = (arr) => {
+    return arr.filter(el => typeof el === 'string' ? el : false).map(el => el[0]).sort().join('')
+}
+// console.log(createDreamTeam(['Matt', 'Ann', 'Dmitry', 'Max', 5, NaN])) // 'ADMM'
+
+// Write a function that finds the factorial of 5.
+const factorial = (n) => {
+    // let fact = 1
+    // for(let i = 1; i <= n; i++) {
+    //     fact = fact * i
+    // }
+    // return fact
+    return (n !== 1) ? n * factorial(n - 1) : 1;
+}
+// console.log(factorial(5))
+

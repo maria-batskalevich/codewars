@@ -74,4 +74,70 @@ function formatDuration(seconds) {
 }
 
 
-console.log(formatDuration(9295201))
+// console.log(formatDuration(9295201))
+
+//Snail Sort
+// Given an n x n array, return the array elements arranged from outermost elements to the middle element,
+// traveling clockwise.
+// array = [[1,2,3],
+//           [4,5,6],
+//           [7,8,9]]
+// snail(array) #=> [1,2,3,6,9,8,7,4,5]
+// For better understanding, please follow the numbers of the next array consecutively:
+// array = [[1,2,3],
+//           [8,9,4],
+//           [7,6,5]]
+// snail(array) #=> [1,2,3,4,5,6,7,8,9]
+// This image will illustrate things more clearly:
+// NOTE: The idea is not sort the elements from the lowest value to the highest; the idea is to traverse
+// the 2-d array in a clockwise snailshell pattern.
+// NOTE 2: The 0x0 (empty matrix) is represented as en empty array inside an array [[]].
+
+let snail = function (array) {
+    const moveRight = (count, result = []) => {
+        result = [...result, ...array.shift()];
+        return --count
+            ? moveDown(count, result)
+            : result;
+    };
+    const moveDown = (count, result) => {
+        for (const arrInn of array) {
+            result.push(arrInn.pop());
+        }
+        return --count
+            ? moveLeft(count, result)
+            : result;
+    };
+    const moveLeft = (count, result) => {
+        result = [...result, ...array.pop().reverse()];
+        return --count
+            ? moveUp(count, result)
+            : result;
+    };
+    const moveUp = (count, result) => {
+        for (let i = array.length - 1; i >= 0; i--) {
+            result.push(array[i].shift());
+        }
+        return --count
+            ? moveRight(count, result)
+            : result;
+    }
+    return moveRight(array.length * 2 - 1);
+}
+console.log(snail((array) => [1,2,3,4,5,6,7,8,9]))
+
+//A format for expressing an ordered list of integers is to use a comma separated list of either
+// individual integers or a range of integers denoted by the starting integer separated from the end integer
+// in the range by a dash, '-'. The range includes all integers in the interval including both endpoints.
+// It is not considered a range unless it spans at least 3 numbers. For example "12,13,15-17"
+// Complete the solution so that it takes a list of integers in increasing order and returns a correctly
+// formatted string in the range format.
+//
+// Example:
+//
+// solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]);
+// // returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
+
+const solution = list => list
+
+console.log(solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
